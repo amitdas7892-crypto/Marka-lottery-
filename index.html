@@ -7,7 +7,6 @@
     <style>
         :root {
             --neon-green: #00ff88;
-            --neon-gold: #ffcc00;
             --bg-dark: #0a0f1d;
             --card-bg: #161f33;
         }
@@ -38,14 +37,12 @@
 
         .prize-box {
             background: rgba(255, 255, 255, 0.05);
-            padding: 12px;
+            padding: 10px;
             border-radius: 12px;
             width: 45%;
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .prize-box h4 { margin: 0; font-size: 12px; color: var(--neon-gold); text-transform: uppercase; }
-        .prize-box p { margin: 5px 0 0; font-weight: bold; font-size: 20px; color: white; }
+        .prize-box p { margin: 5px 0 0; font-weight: bold; font-size: 18px; color: var(--neon-green); }
 
         .grid {
             display: grid;
@@ -64,35 +61,34 @@
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .num-btn.selected {
             background: var(--neon-green);
             color: #000;
             box-shadow: 0 0 15px var(--neon-green);
-            transform: scale(1.1);
-            border: none;
         }
 
+        /* PAYMENT AREA FIXED */
         #payment-area {
-            display: none;
-            margin-top: 30px;
+            display: none; 
+            margin: 30px auto;
             background: var(--card-bg);
             padding: 25px;
             border-radius: 25px;
             border: 2px solid var(--neon-green);
-            animation: fadeIn 0.5s ease;
+            max-width: 400px;
         }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .qr-img {
             width: 100%;
-            max-width: 260px;
-            border: 4px solid white;
+            max-width: 250px;
+            border: 5px solid white;
             border-radius: 15px;
             margin: 15px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn-wa {
@@ -104,14 +100,13 @@
             border-radius: 15px;
             font-weight: bold;
             font-size: 18px;
-            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h2 style="margin:0; color: var(--neon-green); letter-spacing: 1px;">VIP DRAW (1-40)</h2>
+        <h2 style="margin:0; color: var(--neon-green);">VIP DRAW (1-40)</h2>
         <div class="prize-pool">
             <div class="prize-box">
                 <h4>1st Prize</h4>
@@ -127,11 +122,11 @@
     <div class="grid" id="numberGrid"></div>
 
     <div id="payment-area">
-        <h3 style="margin:0">Number Chuna: <span id="displayNum" style="color:var(--neon-green)">--</span></h3>
+        <h3 style="margin:0">Selected: <span id="displayNum" style="color:var(--neon-green)">--</span></h3>
         
-        <img src="IMG_4536.jpeg" class="qr-img" alt="Payment QR">
+        <img src="./IMG_4536.jpeg" class="qr-img" alt="QR Code" onerror="this.src='https://placehold.co/300x400?text=QR+Not+Found+Check+Filename'">
         
-        <p style="color: #94a3b8; font-size: 14px;">Scan QR karein aur screenshot bheinjein</p>
+        <p style="color: #94a3b8; font-size: 14px; margin-bottom: 15px;">Scan QR karein aur screenshot bheinjein</p>
         <a id="whatsappBtn" href="#" target="_blank" class="btn-wa">✅ WhatsApp Screenshot</a>
     </div>
 
@@ -139,22 +134,29 @@
         const grid = document.getElementById('numberGrid');
         const myNo = "918521694137";
 
-        // 1 se 40 tak numbers
         for (let i = 1; i <= 40; i++) {
             let btn = document.createElement('button');
             btn.innerText = i;
             btn.className = 'num-btn';
             btn.onclick = function() {
+                // Remove selection from others
                 document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
+                // Add selection
                 this.classList.add('selected');
                 
-                document.getElementById('payment-area').style.display = 'block';
+                // Show payment area
+                const payArea = document.getElementById('payment-area');
+                payArea.style.display = 'block';
                 document.getElementById('displayNum').innerText = i;
                 
-                let text = `*VIP DRAW ENTRY*\n*Number:* ${i}\n*Prize:* ₹2000 / ₹300\n\nKripya confirm karein!`;
+                // Set WhatsApp Link
+                let text = `*VIP DRAW ENTRY*\n*Number:* ${i}\n*Prize:* ₹2000 / ₹300`;
                 document.getElementById('whatsappBtn').href = `https://wa.me/${myNo}?text=${encodeURIComponent(text)}`;
                 
-                document.getElementById('payment-area').scrollIntoView({behavior: 'smooth'});
+                // AUTO SCROLL: Ye user ko seedha QR code par le jayega
+                setTimeout(() => {
+                    payArea.scrollIntoView({behavior: 'smooth', block: 'start'});
+                }, 100);
             };
             grid.appendChild(btn);
         }
