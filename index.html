@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Lottery 1-99</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background: #eef2f5; margin: 0; padding: 20px; }
+        h2 { color: #2c3e50; margin-bottom: 5px; }
+        .price-tag { background: #ff5722; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 20px; font-weight: bold; }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); 
+            gap: 8px; 
+            max-width: 500px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 15px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .num-btn { 
+            aspect-ratio: 1; 
+            border: 1px solid #ddd; 
+            background: #fff; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border-radius: 5px; 
+            transition: 0.2s;
+        }
+        
+        .num-btn:hover { background: #f0f0f0; }
+        .selected { background: #28a745 !important; color: white !important; border-color: #1e7e34; transform: scale(1.1); }
+        
+        #payment-area { 
+            margin-top: 30px; 
+            display: none; 
+            padding: 20px; 
+            border-radius: 15px; 
+            background: white; 
+            max-width: 400px; 
+            margin-left: auto; 
+            margin-right: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .qr-code { width: 100%; max-width: 250px; border: 5px solid #f8f9fa; border-radius: 10px; margin: 15px 0; }
+        
+        .btn-wa { 
+            display: inline-block; 
+            background: #25D366; 
+            color: white; 
+            padding: 12px 25px; 
+            text-decoration: none; 
+            border-radius: 30px; 
+            font-weight: bold; 
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+        
+        .admin-note { font-size: 12px; color: #7f8c8d; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h2>Lucky Draw 1-99</h2>
+    <div class="price-tag">Ticket Price: ₹20</div>
+    <p style="color: #666;">Apna lucky number select karein:</p>
+
+    <div class="grid" id="grid"></div>
+
+    <div id="payment-area">
+        <h3 style="margin-top:0;">Aapne Number <span id="sel-num" style="color:#ff5722; font-size: 30px;"></span> chuna hai</h3>
+        <p>Kripya ₹20 ka payment karein aur screenshot bheinjein.</p>
+        
+        <img src="https://ibb.co/ksncJSN1" class="qr-code" alt="Payment QR">
+        
+        <br>
+        <a id="wa-link" href="#" target="_blank" class="btn-wa">
+            ✅ Screenshot Bheinjein
+        </a>
+    </div>
+
+    <p class="admin-note">Result din mein 2 baar announce kiya jayega.</p>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const waNumber = "918521694137"; // Aapka WhatsApp Number set kar diya gaya hai
+
+        // 1 se 99 tak grid banana
+        for (let i = 1; i <= 99; i++) {
+            let btn = document.createElement('button');
+            btn.innerText = i;
+            btn.className = 'num-btn';
+            btn.onclick = function() {
+                // Pehle se selected hatayein
+                document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
+                // Naya select karein
+                this.classList.add('selected');
+                showPayment(i);
+            };
+            grid.appendChild(btn);
+        }
+
+        function showPayment(num) {
+            document.getElementById('payment-area').style.display = 'block';
+            document.getElementById('sel-num').innerText = num;
+            
+            // Scroll to payment area
+            document.getElementById('payment-area').scrollIntoView({behavior: 'smooth'});
+
+            // WhatsApp link message setup
+            let message = `Hello, maine number *${num}* select kiya hai. Ye raha mera ₹20 ka payment screenshot. Kripya confirm karein.`;
+            let finalLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+            document.getElementById('wa-link').href = finalLink;
+        }
+    </script>
+
+</body>
+</html>
