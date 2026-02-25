@@ -11,7 +11,6 @@
             --bg-dark: #050505;
             --card-bg: #111111;
         }
-
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg-dark);
@@ -20,22 +19,18 @@
             padding: 15px;
             text-align: center;
         }
-
         .header {
             border: 2px solid var(--neon-blue);
             padding: 15px;
             border-radius: 15px;
             box-shadow: 0 0 15px var(--neon-blue);
             margin-bottom: 25px;
-            background: rgba(0, 210, 255, 0.05);
         }
-
         .prize-pool {
             display: flex;
             justify-content: space-around;
             margin: 15px 0;
         }
-
         .prize-box {
             background: var(--card-bg);
             border: 1px solid #333;
@@ -43,10 +38,7 @@
             border-radius: 10px;
             width: 42%;
         }
-
-        .prize-box h4 { margin: 0; font-size: 11px; color: #aaa; text-transform: uppercase; }
         .prize-box p { margin: 5px 0 0; font-weight: bold; color: var(--neon-pink); font-size: 18px; }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -54,7 +46,6 @@
             max-width: 400px;
             margin: 0 auto;
         }
-
         .num-btn {
             aspect-ratio: 1;
             background: #222;
@@ -64,16 +55,12 @@
             font-weight: bold;
             border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
         }
-
         .num-btn.selected {
             background: var(--neon-blue);
             color: black;
             box-shadow: 0 0 20px var(--neon-blue);
-            transform: scale(1.1);
         }
-
         #payment-area {
             display: none;
             margin-top: 25px;
@@ -81,11 +68,7 @@
             padding: 20px;
             border-radius: 20px;
             border: 1px solid var(--neon-pink);
-            animation: slideIn 0.4s ease-out;
         }
-
-        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
         .qr-image {
             width: 100%;
             max-width: 250px;
@@ -93,7 +76,6 @@
             border-radius: 10px;
             margin: 15px 0;
         }
-
         .btn-wa {
             display: block;
             background: #25D366;
@@ -102,15 +84,13 @@
             text-decoration: none;
             border-radius: 10px;
             font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h2 style="margin:0; letter-spacing: 2px; color: var(--neon-blue);">VIP MEGA DRAW</h2>
+        <h2 style="margin:0; color: var(--neon-blue);">VIP MEGA DRAW</h2>
         <div class="prize-pool">
             <div class="prize-box">
                 <h4>1st Prize</h4>
@@ -121,40 +101,34 @@
                 <p>₹200</p>
             </div>
         </div>
-        <p style="font-size: 12px; margin-top: 10px; color: #00ff88;">Ticket Price: ₹20</p>
     </div>
 
     <div class="grid" id="grid"></div>
 
     <div id="payment-area">
-        <h3 style="margin:0">Number Chuna: <span id="selNum" style="color:var(--neon-blue)">--</span></h3>
-        <p style="font-size: 13px; color: #888; margin: 10px 0;">QR Scan karein aur WhatsApp par screenshot bhejin</p>
+        <h3 style="margin:0">Selected: <span id="selNum" style="color:var(--neon-blue)">--</span></h3>
         
-        <img src="IMG_4536.jpeg" class="qr-image" alt="QR Code">
+        <img src="./IMG_4536.jpeg" class="qr-image" alt="QR Code" onerror="this.src='https://placehold.co/300x400?text=QR+Nahi+Mila+Check+Filename'">
         
-        <a id="waLink" href="#" target="_blank" class="btn-wa">
-            ✅ WhatsApp Screenshot
-        </a>
+        <p style="font-size: 12px; color: #888;">Scan QR aur WhatsApp par screenshot bhejein</p>
+        <a id="waLink" href="#" target="_blank" class="btn-wa">✅ WhatsApp Screenshot</a>
     </div>
 
     <script>
         const grid = document.getElementById('grid');
         const waNumber = "918521694137";
 
-        for (let i = 1; i <= 50; i++) {
+        for (let i = 1; i <= 30; i++) {
             let btn = document.createElement('button');
             btn.innerText = i;
             btn.className = 'num-btn';
             btn.onclick = function() {
                 document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
                 this.classList.add('selected');
-                
                 document.getElementById('payment-area').style.display = 'block';
                 document.getElementById('selNum').innerText = i;
-                
-                let msg = `*VIP DRAW ENTRY*\n\n*Lucky Number:* ${i}\n*Target:* ₹600 / ₹200\n\nKripya confirm karein!`;
+                let msg = `*VIP DRAW ENTRY*\n*Number:* ${i}\n*Target:* ₹600 / ₹200`;
                 document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
-                
                 document.getElementById('payment-area').scrollIntoView({behavior: 'smooth'});
             };
             grid.appendChild(btn);
