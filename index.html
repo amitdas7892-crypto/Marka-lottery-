@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP MEGA DRAW 1-40</title>
+    <title>VIP MATKA | 0-9 Result</title>
     <style>
         :root {
             --neon-green: #00ff88;
-            --bg-dark: #0a0f1d;
-            --card-bg: #161f33;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-dark);
             color: white;
             margin: 0;
@@ -20,44 +20,63 @@
             text-align: center;
         }
 
-        .header {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            padding: 20px;
-            border-radius: 20px;
+        .header-card {
             border: 2px solid var(--neon-green);
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            margin-bottom: 25px;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(0, 255, 136, 0.05);
         }
 
-        .prize-pool {
+        /* RESULT SECTION - Yeh raha aapka Result Option */
+        .result-section {
+            background: #1e293b;
+            border: 2px solid #ffcc00;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 400px;
+            padding: 15px;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+        }
+
+        .result-grid {
             display: flex;
-            justify-content: space-around;
-            margin-top: 15px;
+            justify-content: space-between;
+            gap: 10px;
         }
 
-        .prize-box {
-            background: rgba(255, 255, 255, 0.05);
+        .res-box {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
             padding: 10px;
-            border-radius: 12px;
-            width: 45%;
+            border-radius: 10px;
         }
 
-        .prize-box p { margin: 5px 0 0; font-weight: bold; font-size: 18px; color: var(--neon-green); }
+        .win-tag {
+            background: var(--neon-green);
+            color: black;
+            border-radius: 5px;
+            font-weight: bold;
+            padding: 5px 0;
+            margin-top: 5px;
+            font-size: 18px;
+        }
 
+        /* 0-9 GRID */
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            max-width: 450px;
-            margin: 0 auto;
+            gap: 12px;
+            max-width: 400px;
+            margin: 25px auto;
         }
 
         .num-btn {
             aspect-ratio: 1;
             background: var(--card-bg);
-            border: 1px solid #2d3748;
+            border: 1px solid #334155;
             color: white;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
@@ -66,72 +85,68 @@
         .num-btn.selected {
             background: var(--neon-green);
             color: #000;
-            box-shadow: 0 0 15px var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green);
         }
 
-        /* PAYMENT AREA FIXED */
-        #payment-area {
-            display: none; 
-            margin: 30px auto;
+        #pay-area {
+            display: none;
+            margin-top: 25px;
             background: var(--card-bg);
-            padding: 25px;
-            border-radius: 25px;
+            padding: 20px;
+            border-radius: 20px;
             border: 2px solid var(--neon-green);
-            max-width: 400px;
         }
 
         .qr-img {
             width: 100%;
             max-width: 250px;
-            border: 5px solid white;
+            border: 4px solid white;
             border-radius: 15px;
             margin: 15px 0;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .btn-wa {
+        .wa-btn {
             display: block;
             background: #25D366;
             color: white;
-            padding: 16px;
+            padding: 15px;
             text-decoration: none;
-            border-radius: 15px;
+            border-radius: 12px;
             font-weight: bold;
-            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h2 style="margin:0; color: var(--neon-green);">VIP DRAW (1-40)</h2>
-        <div class="prize-pool">
-            <div class="prize-box">
-                <h4>1st Prize</h4>
-                <p>₹10-100</p>
+    <div class="header-card">
+        <h2 style="margin:0; color: var(--neon-green);">VIP SINGLE DIGIT (0-9)</h2>
+        <p style="margin:5px 0; font-size:14px; color:#cbd5e1;">Prizes: ₹10-100 /</p>
+    </div>
+
+    <div class="result-section">
+        <h3 style="margin: 0 0 10px 0; color: #ffcc00;">📢 RESULT BOARD</h3>
+        <div class="result-grid">
+            <div class="res-box">
+                <p style="margin:0; font-size:11px;">12:00 PM</p>
+                <div class="win-tag">#2</div>
             </div>
-            <div class="prize-box">
-                <h4>2nd Prize</h4>
-                <p>₹10-30</p>
+            <div class="res-box">
+                <p style="margin:0; font-size:11px;">08:00 PM</p>
+                <div class="win-tag" style="background:#ff007f; color:white;">Wait</div>
             </div>
         </div>
     </div>
 
-    <div class="grid" id="numberGrid"></div>
+    <div class="grid" id="grid"></div>
 
-    <div id="payment-area">
-        <h3 style="margin:0">Selected: <span id="displayNum" style="color:var(--neon-green)">--</span></h3>
-        
-        <img src="./IMG_4736.jpeg" class="qr-img" alt="QR Code" onerror="this.src='https://placehold.co/300x400?text=QR+Not+Found+Check+Filename'">
-        
-        <p style="color: #94a3b8; font-size: 14px; margin-bottom: 15px;">Scan QR karein aur screenshot bheinjein</p>
-        <a id="whatsappBtn" href="#" target="_blank" class="btn-wa">✅ WhatsApp Screenshot</a>
+    <div id="pay-area">
+        <h3 style="margin:0">Selected: <span id="selNum" style="color:var(--neon-green)">--</span></h3>
+        <img src="IMG_4736.jpeg" class="qr-img" alt="QR Code">
+        <a id="waLink" href="#" target="_blank" class="wa-btn">✅ WhatsApp Screenshot</a>
     </div>
 
     <script>
-        const grid = document.getElementById('numberGrid');
+        const grid = document.getElementById('grid');
         const myNo = "918521694137";
 
         for (let i = 0; i <= 9; i++) {
@@ -139,24 +154,14 @@
             btn.innerText = i;
             btn.className = 'num-btn';
             btn.onclick = function() {
-                // Remove selection from others
                 document.querySelectorAll('.num-btn').forEach(b => b.classList.remove('selected'));
-                // Add selection
                 this.classList.add('selected');
-                
-                // Show payment area
-                const payArea = document.getElementById('payment-area');
-                payArea.style.display = 'block';
-                document.getElementById('displayNum').innerText = i;
-                
-                // Set WhatsApp Link
-                let text = `*VIP DRAW ENTRY*\n*Number:* ${i}\n*Prize:*first ₹10-₹50 /secound ₹10-₹30`;
-                document.getElementById('whatsappBtn').href = `https://wa.me/${myNo}?text=${encodeURIComponent(text)}`;
-                
-                // AUTO SCROLL: Ye user ko seedha QR code par le jayega
-                setTimeout(() => {
-                    payArea.scrollIntoView({behavior: 'smooth', block: 'start'});
-                }, 100);
+                const area = document.getElementById('pay-area');
+                area.style.display = 'block';
+                document.getElementById('selNum').innerText = i;
+                let msg = `*VIP SINGLE DIGIT ENTRY*\n*Number:* ${i}`;
+                document.getElementById('waLink').href = `https://wa.me/${myNo}?text=${encodeURIComponent(msg)}`;
+                setTimeout(() => area.scrollIntoView({behavior: 'smooth'}), 100);
             };
             grid.appendChild(btn);
         }
